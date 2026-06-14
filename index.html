@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+     <header>
+    <h1>Student Finance Tracker</h1>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#records">Records</a></li>
+        <li><a href="#add">Add</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="dashboard" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">Dashboard</h2>
+      <p>stats go here </p>
+    </section>
+
+    <section id="records" aria-labelledby="records-heading">
+      <h2 id="records-heading">Records</h2>
+       <table>
+            <caption class="sr-only">List of transactions</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- rows will be added by JS later -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="add" aria-labelledby="add-heading">
+      <h2 id="add-heading">Add / Edit Transaction</h2>
+      <form id="add-form">
+        <div class="form-group">
+            <label for="expense-name">Name:</label>
+            <input type="text" id="expense-name" name="description" required>
+        </div>
+
+        <div class="form-group">
+            <label for="expense-amount">Amount:</label>
+            <input type="number" id="expense-amount" name="amount" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="expense-category">Category:</label>
+            <select name="category" id="expense-category">
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Books">Books</option>
+                <option value="Transport">Transport</option>
+                <option value="Entartainment">Entartainment</option>
+                <option value="Fees">Fees</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="expense-date">Date:</label>
+            <input type="date" id="expense-date" name="date" required>
+        </div>
+        <button type="submit">Add Transaction</button>
+      </form>
+    </section>
+
+    <section id="settings" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Settings</h2>
+      <input type="text" placeholder="change anything">
+    </section>
+
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+      <p> 
+        I'm Dan, a Software Engineering student at the African Leadership University (ALU), 
+        passionate about technology, innovation, 
+        and continuous learning. 
+        I enjoy exploring new technologies, building digital solutions, 
+        and developing skills that help solve real-world problems. 
+        My goal is to grow into a skilled technology professional 
+        who creates meaningful and impactful products that improve people's lives.
+        github.com/GISADan-eng/
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Student Finance Tracker — Built by Dan</p>
+  </footer>
+</body>
+</body>
+</html>

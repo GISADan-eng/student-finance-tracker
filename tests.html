@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validator Tests</title>
+  <style>
+    body { font-family: system-ui; padding: 2rem; background: #f5f5f5; }
+    h1 { margin-bottom: 1.5rem; }
+    .test { padding: 0.5rem 1rem; margin: 0.4rem 0; border-radius: 6px; }
+    .pass { background: #d1fae5; color: #065f46; }
+    .fail { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <h1>Validator Tests</h1>
+  <div id="results"></div>
+
+  <script type="module">
+    import {
+      validateDescription,
+      validateAmount,
+      validateDate,
+      validateCategory,
+      validateNoDuplicateWords
+    } from './scripts/validators.js';
+
+    const results = document.getElementById('results');
+
+    function assert(label, actual, expectedValid) {
+      const passed = actual.valid === expectedValid;
+      const div = document.createElement('div');
+      div.className = `test ${passed ? 'pass' : 'fail'}`;
+      div.textContent = `${passed ? '✅' : '❌'} ${label} → valid: ${actual.valid}${actual.message ? ' | ' + actual.message : ''}`;
+      results.appendChild(div);
+    }
+
+    // Description tests
+    assert('Description: valid input', validateDescription('Lunch at cafeteria'), true);
+    assert('Description: leading space', validateDescription(' Lunch'), false);
+    assert('Description: trailing space', validateDescription('Lunch '), false);
+    assert('Description: empty string', validateDescription(''), false);
+
+    // Amount tests
+    assert('Amount: valid integer', validateAmount('12'), true);
+    assert('Amount: valid decimal', validateAmount('12.50'), true);
+    assert('Amount: too many decimals', validateAmount('12.999'), false);
+    assert('Amount: negative number', validateAmount('-5'), false);
+    assert('Amount: letters', validateAmount('abc'), false);
+    assert('Amount: zero', validateAmount('0'), true);
+
+    // Date tests
+    assert('Date: valid date', validateDate('2026-06-14'), true);
+    assert('Date: invalid month', validateDate('2026-13-01'), false);
+    assert('Date: wrong format', validateDate('14-06-2026'), false);
+    assert('Date: empty', validateDate(''), false);
+
+    // Category tests
+    assert('Category: single word', validateCategory('Food'), true);
+    assert('Category: hyphenated', validateCategory('Text-Books'), true);
+    assert('Category: with numbers', validateCategory('Food2'), false);
+    assert('Category: empty', validateCategory(''), false);
+
+    // Duplicate word tests
+    assert('Duplicate: no duplicates', validateNoDuplicateWords('Lunch at cafeteria'), true);
+    assert('Duplicate: repeated word', validateNoDuplicateWords('the the cafeteria'), false);
+    assert('Duplicate: case insensitive', validateNoDuplicateWords('The the cafeteria'), false);
+  </script>
+</body>
+</html>

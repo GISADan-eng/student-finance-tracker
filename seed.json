@@ -1,0 +1,110 @@
+[
+  {
+    "id": "txn_001",
+    "description": "Lunch at cafeteria",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2026-06-10",
+    "createdAt": "2026-06-10T08:30:00.000Z",
+    "updatedAt": "2026-06-10T08:30:00.000Z"
+  },
+  {
+    "id": "txn_002",
+    "description": "Chemistry textbook",
+    "amount": 89.99,
+    "category": "Books",
+    "date": "2026-06-09",
+    "createdAt": "2026-06-09T10:00:00.000Z",
+    "updatedAt": "2026-06-09T10:00:00.000Z"
+  },
+  {
+    "id": "txn_003",
+    "description": "Bus pass monthly",
+    "amount": 45.00,
+    "category": "Transport",
+    "date": "2026-06-01",
+    "createdAt": "2026-06-01T07:00:00.000Z",
+    "updatedAt": "2026-06-01T07:00:00.000Z"
+  },
+  {
+    "id": "txn_004",
+    "description": "Coffee with friends",
+    "amount": 8.75,
+    "category": "Entertainment",
+    "date": "2026-06-11",
+    "createdAt": "2026-06-11T14:00:00.000Z",
+    "updatedAt": "2026-06-11T14:00:00.000Z"
+  },
+  {
+    "id": "txn_005",
+    "description": "Registration fees",
+    "amount": 150.00,
+    "category": "Fees",
+    "date": "2026-06-02",
+    "createdAt": "2026-06-02T09:00:00.000Z",
+    "updatedAt": "2026-06-02T09:00:00.000Z"
+  },
+  {
+    "id": "txn_006",
+    "description": "Dinner at restaurant",
+    "amount": 22.00,
+    "category": "Food",
+    "date": "2026-06-12",
+    "createdAt": "2026-06-12T19:00:00.000Z",
+    "updatedAt": "2026-06-12T19:00:00.000Z"
+  },
+  {
+    "id": "txn_007",
+    "description": "Python programming book",
+    "amount": 45.00,
+    "category": "Books",
+    "date": "2026-06-08",
+    "createdAt": "2026-06-08T11:00:00.000Z",
+    "updatedAt": "2026-06-08T11:00:00.000Z"
+  },
+  {
+    "id": "txn_008",
+    "description": "Uber to campus",
+    "amount": 6.50,
+    "category": "Transport",
+    "date": "2026-06-13",
+    "createdAt": "2026-06-13T08:00:00.000Z",
+    "updatedAt": "2026-06-13T08:00:00.000Z"
+  },
+  {
+    "id": "txn_009",
+    "description": "Movie ticket",
+    "amount": 10.00,
+    "category": "Entertainment",
+    "date": "2026-06-07",
+    "createdAt": "2026-06-07T17:00:00.000Z",
+    "updatedAt": "2026-06-07T17:00:00.000Z"
+  },
+  {
+    "id": "txn_010",
+    "description": "Printing assignment",
+    "amount": 2.50,
+    "category": "Fees",
+    "date": "2026-06-14",
+    "createdAt": "2026-06-14T13:00:00.000Z",
+    "updatedAt": "2026-06-14T13:00:00.000Z"
+  },
+  {
+    "id": "txn_011",
+    "description": "Breakfast at hostel",
+    "amount": 5.00,
+    "category": "Food",
+    "date": "2026-06-15",
+    "createdAt": "2026-06-15T07:30:00.000Z",
+    "updatedAt": "2026-06-15T07:30:00.000Z"
+  },
+  {
+    "id": "txn_012",
+    "description": "Stationery supplies",
+    "amount": 8.00,
+    "category": "Other",
+    "date": "2026-06-03",
+    "createdAt": "2026-06-03T12:00:00.000Z",
+    "updatedAt": "2026-06-03T12:00:00.000Z"
+  }
+]

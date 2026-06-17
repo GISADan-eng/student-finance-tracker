@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-     <header>
+  <!-- ARIA announcer for screen readers -->
+  <div id="announcer" role="status" aria-live="polite" class="sr-only"></div>
+
+  <header>
     <h1>Student Finance Tracker</h1>
     <nav aria-label="Main navigation">
       <ul>
@@ -22,87 +26,152 @@
   </header>
 
   <main id="main-content">
+
+    <!-- DASHBOARD -->
     <section id="dashboard" aria-labelledby="dashboard-heading">
       <h2 id="dashboard-heading">Dashboard</h2>
-      <p>stats go here </p>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total Transactions</span>
+          <span class="stat-value" id="stat-total">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total Spent</span>
+          <span class="stat-value" id="stat-sum">0.00</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Top Category</span>
+          <span class="stat-value" id="stat-top-category">N/A</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Budget Status</span>
+          <span class="stat-value" id="stat-cap" aria-live="polite">No cap set</span>
+        </div>
+      </div>
+      <h3>Last 7 Days</h3>
+      <canvas id="trend-chart" width="600" height="150" aria-label="7-day spending trend"></canvas>
     </section>
 
+    <!-- RECORDS -->
     <section id="records" aria-labelledby="records-heading">
       <h2 id="records-heading">Records</h2>
-       <table>
-            <caption class="sr-only">List of transactions</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- rows will be added by JS later -->
-            </tbody>
-        </table>
+      <div class="table-controls">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search (regex supported)..."
+          aria-label="Search transactions"
+        >
+        <label>
+          <input type="checkbox" id="case-toggle"> Case sensitive
+        </label>
+        <select id="sort-field" aria-label="Sort by">
+          <option value="date">Sort by Date</option>
+          <option value="description">Sort by Description</option>
+          <option value="amount">Sort by Amount</option>
+        </select>
+        <select id="sort-direction" aria-label="Sort direction">
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+      </div>
+      <table id="records-table">
+        <caption class="sr-only">List of transactions</caption>
+        <thead>
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Category</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
 
+    <!-- ADD / EDIT -->
     <section id="add" aria-labelledby="add-heading">
-      <h2 id="add-heading">Add / Edit Transaction</h2>
-      <form id="add-form">
+      <h2 id="add-heading">Add Transaction</h2>
+      <form id="add-form" novalidate>
         <div class="form-group">
-            <label for="expense-name">Name:</label>
-            <input type="text" id="expense-name" name="description" required>
+          <label for="expense-description">Expense Name</label>
+          <input type="text" id="expense-description" name="description" required>
+          <span class="error-msg" id="error-description" role="alert"></span>
         </div>
-
         <div class="form-group">
-            <label for="expense-amount">Amount:</label>
-            <input type="number" id="expense-amount" name="amount" step="0.01" required>
+          <label for="expense-amount">Amount</label>
+          <input type="text" id="expense-amount" name="amount" required>
+          <span class="error-msg" id="error-amount" role="alert"></span>
         </div>
-
         <div class="form-group">
-            <label for="expense-category">Category:</label>
-            <select name="category" id="expense-category">
-                <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Books">Books</option>
-                <option value="Transport">Transport</option>
-                <option value="Entartainment">Entartainment</option>
-                <option value="Fees">Fees</option>
-                <option value="Other">Other</option>
-            </select>
+          <label for="expense-category">Category</label>
+          <select id="expense-category" name="category" required>
+            <option value="">Select category</option>
+            <option value="Food">Food</option>
+            <option value="Books">Books</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Fees">Fees</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="error-msg" id="error-category" role="alert"></span>
         </div>
-        
         <div class="form-group">
-            <label for="expense-date">Date:</label>
-            <input type="date" id="expense-date" name="date" required>
+          <label for="expense-date">Date</label>
+          <input type="date" id="expense-date" name="date" required>
+          <span class="error-msg" id="error-date" role="alert"></span>
         </div>
         <button type="submit">Add Transaction</button>
       </form>
     </section>
 
+    <!-- SETTINGS -->
     <section id="settings" aria-labelledby="settings-heading">
       <h2 id="settings-heading">Settings</h2>
-      <input type="text" placeholder="change anything">
+      <div class="form-group">
+        <label for="budget-cap">Monthly Budget Cap</label>
+        <input type="number" id="budget-cap" placeholder="e.g. 200" min="0">
+        <button id="save-cap">Save Cap</button>
+      </div>
+      <div class="form-group">
+        <label for="base-currency">Base Currency</label>
+        <select id="base-currency">
+          <option value="RWF">RWF - Rwandan Franc</option>
+          <option value="USD">USD - US Dollar</option>
+          <option value="EUR">EUR - Euro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="rate-usd">USD Rate (1 USD = ? base)</label>
+        <input type="number" id="rate-usd" placeholder="e.g. 1300" min="0">
+      </div>
+      <div class="form-group">
+        <label for="rate-eur">EUR Rate (1 EUR = ? base)</label>
+        <input type="number" id="rate-eur" placeholder="e.g. 1400" min="0">
+      </div>
+      <button id="save-settings">Save Settings</button>
+      <hr>
+      <h3>Import / Export</h3>
+      <button id="export-btn">Export JSON</button>
+      <button id="import-trigger">Import JSON</button>
+      <input type="file" id="import-file" accept=".json" class="sr-only">
     </section>
 
+    <!-- ABOUT -->
     <section id="about" aria-labelledby="about-heading">
       <h2 id="about-heading">About</h2>
-      <p> 
-        I'm Dan, a Software Engineering student at the African Leadership University (ALU), 
-        passionate about technology, innovation, 
-        and continuous learning. 
-        I enjoy exploring new technologies, building digital solutions, 
-        and developing skills that help solve real-world problems. 
-        My goal is to grow into a skilled technology professional 
-        who creates meaningful and impactful products that improve people's lives.
-        github.com/GISADan-eng/
-      </p>
+      <p>Student Finance Tracker helps students log expenses, track budgets, and understand spending patterns.</p>
+      <p>Built by Dan — <a href="https://github.com/GISADan-eng" target="_blank">GitHub</a> | gisadan.tech</p>
     </section>
+
   </main>
 
   <footer>
-    <p>Student Finance Tracker — Built by Dan</p>
+    <p>Student Finance Tracker © 2026 — Built by Dan</p>
   </footer>
-</body>
+
+  <script type="module" src="scripts/main.js"></script>
+
 </body>
 </html>
